@@ -17,3 +17,15 @@ message SendRequest{
 message  SendResponse{
     string result = 1;
 }
+
+service GetLast {
+    rpc GetLast(GetLastRequest) returns (GetLastResponse){}
+}
+
+message GetLastRequest{
+    int32 count = 1;
+}
+
+message GetLastResponse{
+    string docs = 1;
+}

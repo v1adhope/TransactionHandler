@@ -27,7 +27,7 @@ func main() {
 	case "send":
 		{
 			if flag.NArg() != 4 {
-				log.Fatal("not enought arg: addressFrom addressTo amount")
+				log.Fatal("not enought arg: [address from] [address to] [amount]")
 			}
 			amount, err := strconv.ParseFloat(flag.Arg(3), 64)
 			if err != nil {
@@ -50,8 +50,11 @@ func main() {
 				log.Fatal("not enought arg: countLastTransaction")
 			}
 			count, err := strconv.Atoi(flag.Arg(1))
-			if err != nil || count <= 0 {
-				log.Fatalf("the number of requested transactions must be greater than 0: %v", err)
+			if count <= 0 {
+				log.Fatal("the number of requested transactions must be greater than 0")
+			} else if err != nil {
+				log.Fatalf("argument input error: %v", err)
+
 			}
 
 			conn := connect()
