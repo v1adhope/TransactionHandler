@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package gRPC;
+
+option go_package = "/pb";
+
+service Send {
+    rpc Send(SendRequest) returns (SendResponse) {}
+}
+
+message SendRequest{
+    string from = 1;
+    string to = 2;
+    double amount = 3;
+}
+
+message  SendResponse{
+    string result = 1;
+}
