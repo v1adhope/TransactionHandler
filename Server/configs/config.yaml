@@ -1,0 +1,11 @@
+# couch username
+# default: admin
+username:
+
+# couch password
+# default: admin
+password:
+
+# desired database name 
+# default: transactions
+databasename: 

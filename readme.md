@@ -1,15 +1,13 @@
 # Overview
-
 The application was created for educational purposes, recording transactions in a NoSQL database using gRPC.
 
 # Launch preparation
-
 [CouchDB](https://couchdb.apache.org/) and [Go](https://go.dev/) must be installed on the device.
-Default username and password for couch are admin, admin.
 
+# Config
+Server settings are located in configs/config.yaml
 
 # Client side
-
 Usage:
 ```
 main.go <command> [arguments]
@@ -28,6 +26,7 @@ For example:
 ```
 main.go send mr1NAUrG3TXFZaF4sUGvRRwA6T1x5BPkF7 mqkGkAUvZMG6jckqNXhENceDfPp5qQbnbm 44.780
 ```
+
 ## Print latest transactions
 ```
 main.go getlast [count]
@@ -35,7 +34,6 @@ main.go getlast [count]
 If more transactions are requested than exist, all available transactions are outputted.
 
 # Result
-
 [client side](https://share.cleanshot.com/qV99AlUtcO2IIhe1H0vj)
 
 [server side](https://share.cleanshot.com/T9NL2mWLOSf0d8zaDxsT)

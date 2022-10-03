@@ -7,11 +7,7 @@ import (
 	"net/http"
 
 	"github.com/fjl/go-couchdb"
-)
-
-const (
-	url    = "http://admin:admin@127.0.0.1:5984/"
-	dbName = "transactions"
+	"github.com/v1adhope/TransactionHandler/Server/internal/configParcer"
 )
 
 type data struct {
@@ -31,7 +27,7 @@ func NewData(time, from, to string, amount float64) data {
 }
 
 func connectDB() *couchdb.Client {
-	db, err := couchdb.NewClient(url, nil)
+	db, err := couchdb.NewClient(configParcer.C.Url, nil)
 	if err != nil {
 		log.Fatalf("couch NewClient: %v", err)
 	}
@@ -42,7 +38,7 @@ func WriteDB(dt *data) {
 	db := connectDB()
 	uuid := getUuid()
 
-	res, err := db.DB(dbName).Put(uuid, dt, "")
+	res, err := db.DB(configParcer.C.DataBaseName).Put(uuid, dt, "")
 	if err != nil {
 		log.Fatalf("database POST: %v", err)
 	}
@@ -70,7 +66,7 @@ func GetDB(count int32) string {
 	opts["include_docs"] = true
 	opts["descending"] = true
 
-	db.DB(dbName).AllDocs(&result, opts)
+	db.DB(configParcer.C.DataBaseName).AllDocs(&result, opts)
 
 	//TODO body response path to docs value
 	strResult := "\n"

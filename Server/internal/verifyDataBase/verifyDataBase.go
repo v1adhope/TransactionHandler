@@ -4,24 +4,20 @@ import (
 	"log"
 
 	"github.com/fjl/go-couchdb"
-)
-
-const (
-	url    = "http://admin:admin@127.0.0.1:5984/"
-	dbName = "transactions"
+	"github.com/v1adhope/TransactionHandler/Server/internal/configParcer"
 )
 
 func init() {
 	log.Print("Please wait, initializing...")
 
-	db, err := couchdb.NewClient(url, nil)
+	db, err := couchdb.NewClient(configParcer.C.Url, nil)
 	if err != nil {
 		log.Fatalf("couch NewClient: %v", err)
 	}
 
 	bdList, err := db.AllDBs()
 	for i := range bdList {
-		if bdList[i] == "transactions" {
+		if bdList[i] == configParcer.C.DataBaseName {
 			log.Println("Base ready to use")
 			return
 		}
@@ -30,7 +26,7 @@ func init() {
 		log.Fatalf("failed to create database: %v", err)
 	}
 
-	tmp, err := db.CreateDB(dbName)
+	tmp, err := db.CreateDB(configParcer.C.DataBaseName)
 	if err != nil {
 		log.Fatalf("failed to create database: %v", err)
 	}
